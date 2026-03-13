@@ -1,0 +1,31 @@
+<label for="marque">Marque</label>
+<select name="marque" required>
+  {% for item in marques %}
+  <option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+</select>
+<br /><br />
+
+<label for="modele">Modele</label>
+<select name="modele" required>
+  {% for item in modeles %}
+  <option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+</select>
+<br /><br />
+
+<label for="ville">Ville</label>
+<select name="ville" required>
+  {% for item in villes %}
+  <option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+</select>
+<br /><br />
+
+<label for="secteur">Secteur</label>
+<select name="secteur" required>
+  {% for item in secteurs %}
+  <option value="{{ item }}">{{ item }}</option>
+  {% endfor %}
+</select>
+<br /><br />

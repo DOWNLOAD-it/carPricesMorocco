@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estimation Prix Voiture | Maroc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}" />
+  </head>
+  <body class="zelij-pattern">
+    <div class="main-container px-4">
+      <div class="container mx-auto max-w-6xl">
+        <div
+          class="flex flex-col lg:flex-row h-full gap-6 items-center lg:items-start"
+        >
+          <!-- Image Section (Left) -->
+          <div class="w-full lg:w-5/12 flex justify-center items-center">
+            <img
+              src="{% static 'images/car.jpg' %}"
+              alt="Car Estimation"
+              class="rounded-xl shadow-lg w-full max-w-md"
+            />
+          </div>
+
+          <!-- Form Section (Right) -->
+          <div
+            class="w-full lg:w-7/12 form-container animate-fadeIn"
+            style="animation-delay: 0.4s"
+          >
+            <div class="p-4 lg:p-6">
+              <div class="text-center mb-3">
+                <h1 class="text-2xl lg:text-3xl font-bold title-gradient">
+                  Estimation Prix Voiture
+                </h1>
+                <p class="text-gray-600 text-sm">
+                  Obtenez une estimation précise pour votre véhicule au Maroc
+                </p>
+              </div>
+
+              <!-- (Your form HTML remains the same) -->
+              <form
+                id="carForm"
+                onsubmit="event.preventDefault(); predictPrice();"
+                class="compact-layout"
+              >
+                <!-- Optimized form layout -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
+                  <!-- Primary info section -->
+                  <div
+                    class="md:col-span-2 bg-indigo-50 rounded-xl mb-2 form-section"
+                  >
+                    <h3 class="text-sm font-semibold text-indigo-800">
+                      Informations Principales
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <!-- Brand and Model (Most important) -->
+                      <div class="input-group">
+                        <label for="marque" class="form-label">Marque</label>
+                        <select id="marque" class="form-input" required="">
+                          <option value="" disabled="" selected="">
+                            Sélectionner
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="input-group">
+                        <label for="modele" class="form-label">Modèle</label>
+                        <select
+                          id="modele"
+                          class="form-input"
+                          disabled=""
+                          required=""
+                        >
+                          <option value="" disabled="" selected="">
+                            Sélectionner
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Vehicle specs section -->
+                  <div class="bg-blue-50 rounded-xl form-section">
+                    <h3 class="text-sm font-semibold text-blue-800">
+                      Caractéristiques
+                    </h3>
+
+                    <div class="input-group">
+                      <label for="year" class="form-label">Année Modèle</label>
+                      <select id="year" class="form-input" required="">
+                        <option value="" disabled="" selected="">
+                          Sélectionner
+                        </option>
+                      </select>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="km" class="form-label"
+                        >Kilométrage (milliers km)</label
+                      >
+                      <input
+                        type="number"
+                        id="km"
+                        class="form-input"
+                        step="0.1"
+                        required=""
+                      />
+                    </div>
+
+                    <div class="input-group">
+                      <label for="puissance" class="form-label"
+                        >Puissance fiscale</label
+                      >
+                      <select id="puissance" class="form-input" required="">
+                        <option value="" disabled="" selected="">
+                          Sélectionner
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Technical details section -->
+                  <div class="bg-violet-50 rounded-xl form-section">
+                    <h3 class="text-sm font-semibold text-violet-800">
+                      Détails Techniques
+                    </h3>
+
+                    <div class="input-group">
+                      <label for="boite" class="form-label"
+                        >Boîte de vitesses</label
+                      >
+                      <select id="boite" class="form-input" required="">
+                        <option value="" disabled="" selected="">
+                          Sélectionner
+                        </option>
+                        <option value="manuelle">Manuelle</option>
+                        <option value="automatique">Automatique</option>
+                      </select>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="carburant" class="form-label"
+                        >Type de carburant</label
+                      >
+                      <select id="carburant" class="form-input" required="">
+                        <option value="" disabled="" selected="">
+                          Sélectionner
+                        </option>
+                        <option value="essence">Essence</option>
+                        <option value="diesel">Diesel</option>
+                      </select>
+                    </div>
+
+                    <div class="input-group">
+                      <label for="origine" class="form-label">Origine</label>
+                      <select id="origine" class="form-input" required="">
+                        <option value="" disabled="" selected="">
+                          Sélectionner
+                        </option>
+                        <option value="ww">WW au Maroc</option>
+                        <option value="dedouanee">Dédouanée</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <!-- Location section -->
+                  <div
+                    class="md:col-span-2 bg-purple-50 rounded-xl mt-1 form-section"
+                  >
+                    <h3 class="text-sm font-semibold text-purple-800">
+                      Localisation
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <div class="input-group">
+                        <label for="ville" class="form-label">Ville</label>
+                        <select id="ville" class="form-input" required="">
+                          <option value="" disabled="" selected="">
+                            Sélectionner
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="input-group">
+                        <label for="secteur" class="form-label">Secteur</label>
+                        <select
+                          id="secteur"
+                          class="form-input"
+                          disabled=""
+                          required=""
+                        >
+                          <option value="" disabled="" selected="">
+                            Sélectionner
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button
+                  type="submit"
+                  class="submit-button w-full mt-4 flex items-center justify-center"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 mr-2"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                  Estimer le Prix
+                </button>
+              </form>
+              <!-- Result Popup -->
+              <div
+                id="result-popup"
+                class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 hidden"
+              >
+                <div
+                  class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 relative"
+                >
+                  <!-- Close button -->
+                  <button
+                    id="close-popup"
+                    class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl font-bold"
+                  >
+                    ×
+                  </button>
+
+                  <h2 class="text-2xl font-bold text-indigo-700 mb-2">
+                    ✅ Estimation du Prix
+                  </h2>
+                  <p class="text-sm text-gray-600 mb-4">
+                    Basée sur les caractéristiques fournies :
+                  </p>
+
+                  <ul
+                    id="car-info"
+                    class="text-sm text-gray-700 space-y-1 mb-4"
+                  ></ul>
+
+                  <div class="bg-indigo-50 p-4 rounded-lg text-center">
+                    <p class="text-lg font-semibold text-indigo-800">
+                      Prix estimé :
+                      <span id="price-value" class="text-2xl font-bold"
+                        >0 DH</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/home.js' %}"></script>
+
+    <iframe
+      height="1"
+      width="1"
+      style="
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        border: none;
+        visibility: hidden;
+      "
+    ></iframe>
+  </body>
+</html>
