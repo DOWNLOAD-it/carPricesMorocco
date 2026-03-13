@@ -64,6 +64,25 @@ The repository includes several CSV files representing different stages of data 
 
 ### Installation
 1. **Clone the repository**:
-   ```bash
-   git clone [https://github.com/DOWNLOAD-it/carPricesMorocco.git](https://github.com/DOWNLOAD-it/carPricesMorocco.git)
-   cd carPricesMorocco```
+```
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
+2. **Install dependencies**:
+```
+pip install flask pandas numpy catboost beautifulsoup4 scikit-learn
+```
+### 💻 Usage
+1. **Scraping Fresh Data**:
+```
+python Scrape.py
+```
+1. **Exploring and Training**:
+```
+jupyter notebook Processing.ipynb
+```
+1. **Launching the Web App**:
+```
+cd FlaskApp
+python app.py
+```
